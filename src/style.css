@@ -1,0 +1,274 @@
+#setupMusic,
+#gameMusic {
+    visibility: hidden;
+}
+
+.cover_page{
+    visibility: visible;
+}
+.hidden{
+    content-visibility: hidden;
+}
+
+.wrapper{
+    border-style: solid;
+    border-style: outset;
+    border-top:outset;
+    border-bottom: outset;
+    border-left: outset;
+    border-right: outset;
+    
+    margin: 1vmin;
+}
+.cover_page_text{
+    gap: 2vmin;
+    flex-direction: column;
+}
+.cover_page_buttons{
+    
+font-size: 2.25rem !important;
+}
+
+h4{
+
+font-family: 'Billo';
+
+font-size: xxx-large;
+}
+
+
+.modal-content{
+    background-color: #fcebd1;
+    padding: 10px;
+    font-variant: petite-caps;
+    align-items: center;
+}
+.game {
+    visibility: hidden;
+}
+
+.pcSquare.taken {
+    /* background: black; */
+}
+
+body {
+    background-image: url("../images/low_polymesh7-06-01.jpg");
+    background-size: cover;
+    font-family: 'Bowlby';
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    width: auto;
+    height: auto;
+}
+
+
+.ship div {
+    width: calc(4.6vmin * var(--width, 1));
+    height: calc(4.6vmin * var(--height, 1));
+    margin: 1vimin;
+}
+
+.ship>div {
+    width: 4.6vmin;
+    height: 4.6vmin;
+}
+
+.ship {
+    width: calc(4.6vmin * var(--width, 1));
+    height: calc(4.6vmin * var(--height, 1));
+    margin: 1vimin;
+    display: flex;
+    border-style: solid;
+    border-radius: 5px;
+    background-color: black;
+    border-color: white;
+    background: url("../images/player_ship.png");
+    background-repeat: round;
+}
+
+.ship.vertical {
+    flex-direction: column;
+}
+
+.grid-display {
+    display: flex;
+    justify-content: center;
+    gap: 1vmin;
+}
+
+.destroyer-container {
+    --width: 2;
+}
+
+.destroyer-container-vertical {
+    --height: 2;
+    --width: 1;
+}
+
+.submarine-container {
+    --width: 3;
+}
+
+.submarine-container-vertical {
+    --height: 3;
+    --width: 1;
+}
+
+.cruiser-container {
+    --width: 3;
+}
+
+.cruiser-container-vertical {
+    --height: 3;
+    --width: 1;
+}
+
+.battleship-container {
+    --width: 4;
+}
+
+.battleship-container-vertical {
+    --height: 4;
+    --width: 1;
+}
+
+.carrier-container {
+    --width: 5;
+}
+
+.carrier-container-vertical {
+    --height: 5;
+    --width: 1;
+}
+
+@font-face {
+    font-family: Bowlby;
+    src: url("../fonts/BowlbyOneSC-Regular.ttf");
+}
+
+@font-face {
+    font-family: Billo;
+    src: url("../fonts/BILLO___.TTF");
+}
+
+header {
+    font-family: 'Billo';
+    font-size: 70px;
+    text-align: center;
+}
+
+.gameInfo {
+    font-family: 'Bowlby', cursive;
+}
+
+
+/* Grids */
+
+.grid div {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    border-style: inset;
+    border-radius: 10px;
+    border-color: navajowhite;
+}
+
+.grid-user,
+.grid-pc {
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+}
+
+
+/* Game */
+
+.whose-turn {
+    visibility: visible;
+    background-color: black;
+    display: inline-block;
+}
+
+.userSquare,
+.pcSquare {
+    border-radius: 20px;
+}
+
+.userSquare {
+    background: rgb(115, 226, 249);
+    background: url("../images/player_square.png");
+    margin: auto;
+}
+
+.userSquare.taken {
+    background: url("../images/player_ship.png");
+}
+
+.pcSquare {
+    background: rgb(255, 226, 208);
+    background: url("../images/pc_square.png");
+}
+
+@keyframes scale-up-center-miss {
+    0% {
+        transform: scale(0.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes bottom-boom {
+    0%,
+    100% {
+        transform: rotate(0deg);
+        transform-origin: 50% 100%;
+    }
+    10% {
+        transform: rotate(2deg);
+    }
+    20%,
+    40%,
+    60% {
+        transform: rotate(-4deg);
+    }
+    30%,
+    50%,
+    70% {
+        transform: rotate(4deg);
+    }
+    80% {
+        transform: rotate(-2deg);
+    }
+    90% {
+        transform: rotate(2deg);
+    }
+}
+
+.miss::after {
+    content: "";
+    background: url("../images/miss.png");
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: contain;
+    animation-name: scale-up-center-miss;
+    animation-duration: 0.2s;
+}
+
+.boom::after {
+    content: "";
+    background: url("../images/boom.png");
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: contain;
+    animation-name: bottom-boom;
+    animation-duration: 0.2s;
+}

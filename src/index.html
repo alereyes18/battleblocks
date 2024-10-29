@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="preload" as="image" href="../images/low_polymesh7-06-01.jpg">
+
+    <meta charset="utf-8">
+    <title>Battleblocks</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="battleship.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+
+
+
+    <audio id="setupMusic" controls autoplay loop>
+        <source src="../music/normalized_setup_loop1m.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+      </audio>
+
+    <audio id="gameMusic" controls loop>
+        <source src = "../music/normalized_game_loop1m.mp3" type = "audio/mp3" id="game">
+        Your browser does not support the audio element.
+      </audio>
+
+
+</head>
+<header>Battleblocks</header>
+
+<body>
+
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="rulebook_modal" tabindex="-1" aria-labelledby="rulebook_modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="rulebook_modalLabel">Battleblocks Rules</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h5>Rules</h5>
+                    <p>You and your enemy have a grid of 100 squares. You each have 5 "tanks" of set sizes. Each "tank" is a vertical 
+                        or horizontal chain of blocks. </p> 
+                        <p>The following tanks can be placed: </p>
+                        <ul>
+                            <li>5 blocks (1 tank)</li>
+                            <li>4 blocks (1 tank)</li>
+                            <li>3 blocks (2 tanks)</li>
+                            <li>2 blocks (1 tank)</li>
+                        </ul>
+                        <img src = "../images/ships_before_place.png">
+                        <p>You can place your tanks on your grid. The tanks can be rotated before placement.</p>
+                        <img src = "../images/tanks_on_board.png">
+                        <p>You must place all your tanks before starting the game!</p>
+                        <h5>Gameplay</h5>
+                        <p>You and your opponent will take turns attacking each others grids.</p>
+                        <p>The goal is to successfully hit all of your opponents squares first!</p>
+                        <p>Each time you hit a block on the opponents grid, you gain a point.
+                            Each time you destroy an entire tank, you gain 5, 6, 7, or 8 points, depending on which tank you destroyed.
+                            To win, you must reach 50 points. 
+                        </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="cover_page text-center">
+        <div class="btn-group btn-group-justified text-center btn-group-lg cover_page_text" role="group" aria-label="...">
+            <div class="btn-group-lg cover_page_buttons" role="group">
+                <button type="button" class="btn btn-primary cover_page_buttons" data-bs-toggle="modal" data-bs-target="#rulebook_modal">Rulebook</button>
+            </div>
+            <div class="btn-group-lg" role="group">
+                <button type="button" class="btn btn-lg btn-warning toggle cover_page_buttons" id="load-game" data-bs-toggle="button" aria-pressed="false" autocomplete="off">Let's Play!</button>
+            </div>
+        </div>
+    </div>
+
+    <div class='game'>
+        <div class="container justify-content-lg-center rounded ">
+           <div class="wrapper"><div class="grid grid-user justify-content-lg-center rounded"></div></div>
+            <!-- <div class="grid grid-user justify-content-lg-center rounded "></div> -->
+            <div class = "wrapper"><div class="grid grid-pc justify-content-lg-center rounded"></div></div>
+        </div>
+
+
+        <div class="gameInfo text-center">
+            <div class="btn-group btn-group-justified text-center btn-group-lg" role="group" aria-label="...">
+                <div class="btn-group-lg" role="group">
+                    <button type="button" class="btn btn-lg btn-primary toggle" id="start" data-bs-toggle="button" aria-pressed="false" autocomplete="off">Start Game</button>
+                </div>
+                <div class="btn-group-lg" role="group">
+                    <button type="button" class="btn btn-lg btn-secondary toggle" id="rotate" data-bs-toggle="button" aria-pressed="false" autocomplete="off">Rotate Ship</button>
+                </div>
+            </div>
+            <h3 id="info"></h3>
+            <h3 id="userScore"></h3>
+            <h3 id="pcScore"></h3>
+            <h3 id="whose-turn"></h3>
+        </div>
+
+        <div class="grid-display rounded " draggable="false">
+            <div class="ship destroyer-container " draggable="true">
+                <div id="destroyer-0"></div>
+                <div id="destroyer-1"></div>
+            </div>
+            <div class="ship submarine-container" draggable="true">
+                <div id="submarine-0"></div>
+                <div id="submarine-1"></div>
+                <div id="submarine-2"></div>
+            </div>
+            <div class="ship cruiser-container" draggable="true">
+                <div id="cruiser-0"></div>
+                <div id="cruiser-1"></div>
+                <div id="cruiser-2"></div>
+            </div>
+            <div class="ship battleship-container" draggable="true">
+                <div id="battleship-0"></div>
+                <div id="battleship-1"></div>
+                <div id="battleship-2"></div>
+                <div id="battleship-3"></div>
+            </div>
+            <div class="ship carrier-container" draggable="true">
+                <div id="carrier-0"></div>
+                <div id="carrier-1"></div>
+                <div id="carrier-2"></div>
+                <div id="carrier-3"></div>
+                <div id="carrier-4"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+</html>
