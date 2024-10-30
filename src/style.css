@@ -52,9 +52,11 @@ font-size: xxx-large;
 }
 
 body {
-    background-image: url("../images/low_polymesh7-06-01.jpg");
+    background-image: url("../images/background.jpg");
     background-size: cover;
+    background-attachment: fixed;
     font-family: 'Bowlby';
+    background-repeat: round;
 }
 
 .container {
